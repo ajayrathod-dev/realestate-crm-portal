@@ -1,0 +1,31 @@
+# PHP / Server Logs
+*.log
+error_log
+*/error_log
+
+# Archives & Temporary files
+*.zip
+*.tar
+*.gz
+*.rar
+
+# Operating System Files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.DS_Store
+._*
+
+# IDE & Editor configurations
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+*~
+
+# Temporary upload directories / cache (uncomment if you wish to exclude uploaded images)
+# /images/property_uploads/*
+# !/images/property_uploads/.gitkeep

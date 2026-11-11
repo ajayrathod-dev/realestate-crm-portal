@@ -1,0 +1,288 @@
+<?php
+
+include('header.php');
+
+
+				if($designation_if=='Reception' || $designation_if=='CLERK'){
+				    
+				    
+				}
+				else
+				{
+				    header('Location:dashboard.php');
+				}
+				
+		
+		date_default_timezone_set('Asia/Kolkata'); // Set to your timezone
+$currentDateTime = date("Y-m-d H:i:s"); // Format: 2025-06-09 11:45:00
+	
+
+?>
+
+<style>
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+  }
+
+  .switch input {
+    display: none;
+  }
+
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+
+  input:checked+.slider {
+    background-color: #2196F3;
+  }
+
+  input:focus+.slider {
+    box-shadow: 0 0 1px #2196F3;
+  }
+
+  input:checked+.slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+  }
+
+  .slider.round:before {
+    border-radius: 50%;
+  }
+</style>
+<script>
+  function myfunction(str, str1) {
+    
+
+    alert("DO YOU WANT TO CHANGE STAUTS");
+
+    if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+      xmlhttp = new XMLHttpRequest();
+    } else { // code for IE6, IE5
+      xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange = function() {
+      if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+        document.getElementById("prog_show").innerHTML = xmlhttp.responseText;
+        location.reload();
+
+      }
+    }
+    xmlhttp.open("GET", "show_program.php?uid=" + str + "&status=" + str1, true);
+    xmlhttp.send();
+  }
+</script>
+<div class="page-wrapper">
+   <div class="page-content">
+
+                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleLargeModal">+ जावक रजिस्टर </button>
+                     <div class="modal fade" id="exampleLargeModal" tabindex="-1" aria-hidden="true">
+                      <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title">जावक रजिस्टर </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                              <form class="row g-3" action="javak1.php" method="post" enctype="multipart/form-data">
+                                   <div class="col-md-6">
+                                    <label for="inputFirstName" class="form-label">जावक क्रमांक </label>
+                                     <input type="number" class="form-control" id="inputFirstName" name="j_k" required>
+                                      <input type="hidden" class="form-control" id="inputFirstName" name="branch" required value="<?php echo $mybranch; ?>">
+                                  </div>
+                                  <div class="col-md-6">
+                                    <label for="inputFirstName" class="form-label">प्राप्तकर्ता नाव </label>
+                                     <input type="text" class="form-control" id="inputFirstName" name="c_name" required>
+                                     
+                                  </div>
+                                 
+                                  <div class="col-md-6">
+                                    <label for="inputFirstName" class="form-label">प्राप्तकर्ता </label>
+                                     <input type="text" class="form-control" id="inputFirstName" name="rec" required>
+                                  </div>
+                                   <div class="col-md-6">
+                                    <label for="inputFirstName" class="form-label">पत्ता </label>
+                                     <input type="text" class="form-control" id="inputFirstName" name="address" required>
+                                  </div>
+                                    <div class="col-md-6">
+                                    <label for="inputFirstName" class="form-label">विवरण</label>
+                                     <input type="text" class="form-control" id="inputFirstName" name="desc" required>
+                                  </div>
+                                  <div class="col-md-6">
+                                    <label for="inputFirstName" class="form-label">पाठवण्याची पद्धत</label>
+                                     <input type="text" class="form-control" id="inputFirstName" name="send" required>
+                                  </div>
+                                    <div class="col-md-6">
+                                    <label for="inputFirstName" class="form-label">शेरा</label>
+                                     <input type="text" class="form-control" id="inputFirstName" name="shera" required>
+                                  </div>
+                                  <div class="col-md-6">
+                                    <label for="inputFirstName" class="form-label">Outward from</label>
+                                     <select  class="form-control select2" id="workAssignTo" name="of" required>
+                                         <option>--select--</option>
+                                         <?php 
+                                            $sql45 = "SELECT * FROM admin WHERE status=0";
+                                            $result45 = mysqli_query($link, $sql45);
+                                            if ($result45->num_rows > 0) {
+ 
+                                          	while ($row45 = $result45->fetch_assoc()) {
+                                     		?>
+                                     		
+                                     		<option value="<?php echo $row45['user_id']; ?>"><?php echo $row45['emp_name']; ?> (<?php echo $row45['designation']; ?>)(<?php echo $row45['branch']; ?>)</option>
+                                      <?php	
+                                           }
+                                         }
+                                         
+                                         
+                                         ?>
+                                        
+                                     </select>
+                                  </div>
+                                  
+                                    <div class="col-md-6">
+                                    <label for="inputFirstName" class="form-label">दिनांक</label>
+                                     <input type="datetime-local" class="form-control" id="datetimeInput" value="<?php echo $currentDateTime; ?>" name="det" required step="1">
+                                  </div>
+                               
+                              
+                                  <div class="col-12" align="center">
+                                    <button type="submit" class="btn btn-outline-primary px-5" onclick="return confirm('Do you want to submit?')">जतन करा </button>
+                                  </div>
+                                </form>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                          
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+
+      <div class="card">
+         <div class="card-body">
+            <div class="table-responsive">
+               <table id="example2" class="table table-striped table-bordered">
+                   <thead>
+                   <tr>
+                      <th>अ.क्र</th> 
+                     <th>जावक क्रमांक </th>
+                     <th>प्राप्तकर्ता नाव</th>
+                     <th>प्राप्तकर्ता</th> 
+                     <th>पत्ता</th>
+                     <th>विवरण</th>
+                     <th>पाठवण्याची पद्धत</th>
+                     <th>शेरा</th>
+                     <th>Outword From</th>
+                     <th>द्वारे</th>
+                     <th>दिनांक</th>
+                     
+                  
+                   </tr>
+                   </thead>
+                 <tbody>
+                   <?php 
+                   $sr=1;
+                    $sql451 = "SELECT * FROM javak_reg WHERE `by`='$u_uname' OR `branch`='$mybranch' order by id desc limit 500";
+                    $result451 = mysqli_query($link, $sql451);
+                    if ($result451->num_rows > 0) {
+                    while ($row451 = $result451->fetch_assoc()) {
+                         $whoose_meet=$row451['outword_from'];
+                        
+                    ?>
+                          <tr>
+                              <td><?php echo $sr;  ?></td>
+                               <td><?php echo $row451['javak_id']; ?></td>
+                               <td><?php echo $row451['rec_name']; ?></td>
+                               <td><?php echo $row451['rec']; ?></td>
+                               <td><?php echo $row451['address']; ?></td>
+                               <td><?php echo $row451['desc']; ?></td>
+                               <td><?php echo $row451['send_type']; ?></td>
+                               <td><?php echo $row451['shera']; ?></td>
+                               <td><?php
+                              
+                                    $sql452 = "SELECT * FROM admin WHERE user_id='$whoose_meet'";
+                                            $result452 = mysqli_query($link, $sql452);
+                                            if ($result452->num_rows > 0) {
+ 
+                                          	while ($row452 = $result452->fetch_assoc()) {
+                                     		
+                                     		 echo $row452['emp_name']."(".$row452['designation'].") (".$row452['branch'].")";                        
+                                           }
+                                         }
+                              
+                              
+                              
+                              
+                              ?></td>
+                             
+                              <td><?php
+                              $byid = $row451['by'];
+                                    $sql45 = "SELECT * FROM admin WHERE user_id='$byid'";
+                                            $result45 = mysqli_query($link, $sql45);
+                                            if ($result45->num_rows > 0) {
+ 
+                                          	while ($row45 = $result45->fetch_assoc()) {
+                                     		
+                                     		 echo $row45['emp_name'];                        
+                                           }
+                                         }
+                              
+                              
+                              
+                              
+                              ?></td>
+                              <td><?php 
+$datetime = $row451['date']; // 2:30 PM
+$formatted = date("d-m-Y h:i A", strtotime($datetime));
+echo $formatted;
+                               ?></td>
+                              
+                          </tr>           		
+                                     	
+                    <?php	
+                    $sr++;
+                     }
+                      }
+                                         
+                ?>
+                 </tbody>
+
+               </table>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+</div>
+<?php
+   include('footer.php');
+?>
